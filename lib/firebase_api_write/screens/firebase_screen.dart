@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:flutter_examples/firebase_api_write/models/album_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:flutter_examples/alert_dialog/models/album_model.dart';
 
 class FirebaseExampleScreen extends StatefulWidget {
   FirebaseExampleScreen({Key? key}) : super(key: key);
@@ -26,27 +26,10 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Container(
-              color: Colors.blue,
-            ),
-          ),
-          postDataButtonWidget(context),
-        ],
-      ),
-    );
-  }
-
-  Expanded postDataButtonWidget(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Center(
+      body: Center(
         child: IconButton(
           icon: Icon(Icons.add, color: Colors.blueAccent),
-          iconSize: 150,
+          iconSize: 200,
           onPressed: () {
             showDialog(
               context: context,
@@ -84,15 +67,6 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
       ),
     );
   }
-
-  // Future<AlbumModel> getJsonDatas() async {
-  //   final _response = await http.get(Uri.parse("https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/.json"));
-  //   var album = AlbumModel.fromJson(json.decode(_response.body));
-  //   print(album.id);
-  //   print(album.userId);
-  //   print(album.title);
-  //   return album;
-  // }
 
   Future<bool> postJsonDatas() async {
     final _album = AlbumModel(id: int.parse(_idController.text), title: _titleController.text, userId: int.parse(_userIdController.text));
