@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_examples/alert_dialog/screens/firebase_screen.dart';
 import 'using_http_futurebuilder/screens/using_futurebuilder.dart';
 
 void main() => runApp(MyApp());
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: JsonExamplePage(),
+      home: FirebaseExampleScreen(),
     );
   }
 }

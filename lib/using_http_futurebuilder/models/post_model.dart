@@ -1,12 +1,12 @@
-class PostModal {
+class PostModel {
   late int userId;
   late int id;
   late String title;
   late bool completed;
 
-  PostModal({required this.userId, required this.id, required this.title, required this.completed});
+  PostModel({required this.userId, required this.id, required this.title, required this.completed});
 
-  PostModal.fromJson(Map<String, dynamic> json) {
+  PostModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     id = json['id'];
     title = json['title'];

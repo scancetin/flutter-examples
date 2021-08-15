@@ -1,22 +1,21 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_examples/using_http_futurebuilder/models/post_modal.dart';
+import 'package:flutter_examples/using_http_futurebuilder/models/post_model.dart';
 import 'package:http/http.dart' as http;
 
-class JsonExamplePage extends StatefulWidget {
-  JsonExamplePage({Key? key}) : super(key: key);
+class JsonExampleScreen extends StatefulWidget {
+  JsonExampleScreen({Key? key}) : super(key: key);
 
   @override
-  _JsonExamplePageState createState() => _JsonExamplePageState();
+  _JsonExampleScreenState createState() => _JsonExampleScreenState();
 }
 
-class _JsonExamplePageState extends State<JsonExamplePage> {
+class _JsonExampleScreenState extends State<JsonExampleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<PostModal>(
+        child: FutureBuilder<PostModel>(
           future: getJsonDatas(),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasError) {
@@ -26,8 +25,10 @@ class _JsonExamplePageState extends State<JsonExamplePage> {
               return CircularProgressIndicator();
             }
             return ListTile(
+              leading: Text("${snapshot.data.completed}"),
               title: Text(snapshot.data.title),
-              subtitle: Text("${snapshot.data.completed}"),
+              subtitle: Text("${snapshot.data.userId}"),
+              trailing: Text("${snapshot.data.id}"),
             );
           },
         ),
@@ -35,9 +36,9 @@ class _JsonExamplePageState extends State<JsonExamplePage> {
     );
   }
 
-  Future<PostModal> getJsonDatas() async {
+  Future<PostModel> getJsonDatas() async {
     final _response = await http.get(Uri.parse("https://jsonplaceholder.typicode.com/todos/1"));
-    var post = PostModal.fromJson(json.decode(_response.body));
+    var post = PostModel.fromJson(json.decode(_response.body));
     return post;
   }
 }
