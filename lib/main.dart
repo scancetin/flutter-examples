@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_examples/file_manager/file_download_screen.dart';
 import 'package:flutter_examples/firebase_api_write/screens/firebase_screen.dart';
 import 'package:flutter_examples/widget_examples/screens/collapse_view.dart';
 import 'package:flutter_examples/widget_examples/screens/page_view_screen.dart';
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: CollapseViewPage(),
+      debugShowCheckedModeBanner: false,
+      home: FileDownloadScreen(),
     );
   }
 }
