@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CollapseViewPage extends StatefulWidget {
-  const CollapseViewPage({Key? key}) : super(key: key);
+class CollapseViewScreen extends StatefulWidget {
+  const CollapseViewScreen({Key? key}) : super(key: key);
 
   @override
-  _CollapseViewPageState createState() => _CollapseViewPageState();
+  _CollapseViewScreenState createState() => _CollapseViewScreenState();
 }
 
-class _CollapseViewPageState extends State<CollapseViewPage> {
+class _CollapseViewScreenState extends State<CollapseViewScreen> {
   @override
   void initState() {
     super.initState();
