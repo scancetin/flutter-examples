@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_examples/file_manager/file_download_screen.dart';
 import 'package:flutter_examples/firebase_api_write/screens/firebase_screen.dart';
 import 'package:flutter_examples/shared_preferences/shared_example.dart';
+import 'package:flutter_examples/state_management/vanilla/state_screen.dart';
 import 'package:flutter_examples/widget_examples/collapse_view.dart';
 import 'package:flutter_examples/widget_examples/page_view_screen.dart';
 import 'package:flutter_examples/widget_examples/popup_example_widget.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: PopupExampleWidget(),
+      home: StateManagementScreen(),
     );
   }
 }
