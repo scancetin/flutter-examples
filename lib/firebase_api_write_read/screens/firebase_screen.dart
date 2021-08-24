@@ -112,14 +112,7 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
   Future<bool> postJsonDatas() async {
     final String _url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/.json";
     final _album = AlbumModel(id: int.parse(_idController.text), title: _titleController.text, userId: int.parse(_userIdController.text));
-    final _response = await http.post(
-      Uri.parse(_url),
-      body: json.encode(_album.toJson()),
-      encoding: utf8,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
+    final _response = await http.post(Uri.parse(_url), body: json.encode(_album.toJson()));
 
     if (_response.statusCode == 200) {
       return true;
@@ -129,19 +122,8 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
   }
 
   Future<List<AlbumModel>> getJsonDatas() async {
-    // final String _url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/0.json";
-    // final _response = await http.get(Uri.parse(_url));
-    // var post = AlbumModel.fromJson(json.decode(_response.body));
-    // print(json.decode(_response.body));
-    // post.list.add(post);
-    // post.list.add(post);
-    // post.list.add(post);
-    // post.list.add(post);
-    // print(post.list[0]);
-
     final String url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/.json";
     final response = await http.get(Uri.parse(url));
-
     Iterable albums = json.decode(response.body);
     List<AlbumModel> posts = List<AlbumModel>.from(albums.map((model) => AlbumModel.fromJson(model)));
 
