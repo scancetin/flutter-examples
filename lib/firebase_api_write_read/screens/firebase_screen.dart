@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_examples/firebase_api_write/models/album_model.dart';
+import 'package:flutter_examples/firebase_api_write_read/models/album_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -43,19 +43,24 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
 
   Center getDataWidget() {
     return Center(
-      child: FutureBuilder<AlbumModel>(
+      child: FutureBuilder<List<AlbumModel>>(
         future: getJsonDatas(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<AlbumModel>> snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
           }
-          return ListTile(
-            leading: Text("${snapshot.data.userId}"),
-            title: Text(snapshot.data.title),
-            trailing: Text("${snapshot.data.id}"),
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                leading: Text("${snapshot.data![index].userId}"),
+                title: Text(snapshot.data![index].title),
+                trailing: Text("${snapshot.data![index].id}"),
+              );
+            },
           );
         },
       ),
@@ -104,22 +109,43 @@ class _FirebaseExampleScreenState extends State<FirebaseExampleScreen> {
     );
   }
 
-  Future<AlbumModel> getJsonDatas() async {
-    final String _url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/0.json";
-    final _response = await http.get(Uri.parse(_url));
-    var post = AlbumModel.fromJson(json.decode(_response.body));
-    return post;
-  }
-
   Future<bool> postJsonDatas() async {
     final String _url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/.json";
     final _album = AlbumModel(id: int.parse(_idController.text), title: _titleController.text, userId: int.parse(_userIdController.text));
-    final _response = await http.post(Uri.parse(_url), body: json.encode(_album.toJson()));
+    final _response = await http.post(
+      Uri.parse(_url),
+      body: json.encode(_album.toJson()),
+      encoding: utf8,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
 
     if (_response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
+  }
+
+  Future<List<AlbumModel>> getJsonDatas() async {
+    // final String _url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/0.json";
+    // final _response = await http.get(Uri.parse(_url));
+    // var post = AlbumModel.fromJson(json.decode(_response.body));
+    // print(json.decode(_response.body));
+    // post.list.add(post);
+    // post.list.add(post);
+    // post.list.add(post);
+    // post.list.add(post);
+    // print(post.list[0]);
+
+    final String url = "https://fir-sample-api-5f7ac-default-rtdb.europe-west1.firebasedatabase.app/.json";
+    final response = await http.get(Uri.parse(url));
+
+    Iterable albums = json.decode(response.body);
+    List<AlbumModel> posts = List<AlbumModel>.from(albums.map((model) => AlbumModel.fromJson(model)));
+
+    print(posts.length);
+    return posts;
   }
 }
