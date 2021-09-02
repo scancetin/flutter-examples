@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_examples/using_http_futurebuilder/models/post_model.dart';
 import 'package:http/http.dart' as http;
 
-class JsonExampleScreen extends StatefulWidget {
-  JsonExampleScreen({Key? key}) : super(key: key);
+class JsonFutureBuilderScreen extends StatefulWidget {
+  JsonFutureBuilderScreen({Key? key}) : super(key: key);
 
   @override
-  _JsonExampleScreenState createState() => _JsonExampleScreenState();
+  _JsonFutureBuilderScreenState createState() => _JsonFutureBuilderScreenState();
 }
 
-class _JsonExampleScreenState extends State<JsonExampleScreen> {
+class _JsonFutureBuilderScreenState extends State<JsonFutureBuilderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

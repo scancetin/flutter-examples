@@ -13,6 +13,7 @@ import 'package:flutter_examples/widget_examples/popup_example_widget.dart';
 import 'package:provider/provider.dart';
 import 'custom_theme/change_theme_screen.dart';
 import 'custom_theme/custom_theme.dart';
+import 'json_serializable/json_example_screen.dart';
 import 'using_http_futurebuilder/screens/using_futurebuilder.dart';
 
 void main() => runApp(
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: Provider.of<CustomThemeModel>(context).getThemeData,
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      home: ChangeThemeScreen(),
+      home: JsonExampleScreen(),
     );
   }
 }
